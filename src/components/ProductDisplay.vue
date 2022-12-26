@@ -1,5 +1,7 @@
 <script setup>
 import { ref, computed } from 'vue'
+import ReviewForm from '@/components/ReviewForm.vue'
+import ReviewList from '@/components/ReviewList.vue'
 import socksGreenImage from '@/assets/images/socks_green.jpeg'
 import socksBlueImage from '@/assets/images/socks_blue.jpeg'
 
@@ -24,6 +26,8 @@ const variants = ref([
   { id: 2234, color: 'green', image: socksGreenImage, quantity: 50 },
   { id: 2235, color: 'blue', image: socksBlueImage, quantity: 0 },
 ])
+
+const reviews = ref([])
 
 // computed properties
 const title = computed(() => {
@@ -55,8 +59,12 @@ const updateVariant = (index) => {
   selectedVariant.value = index
 }
 
-</script>
+const addReview = (review) => {
+  reviews.value.push(review)
+  console.log(reviews.value);
+}
 
+</script>
 <template>
     <div class="product-display">
     <div class="product-container">
@@ -89,5 +97,7 @@ const updateVariant = (index) => {
         </button>
       </div>
     </div>
+    <ReviewList :reviews="reviews"></ReviewList>
+    <ReviewForm @review-submitted="addReview"></ReviewForm>
   </div>
 </template>
