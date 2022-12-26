@@ -10,6 +10,9 @@ const props = {
     }
 }
 
+// eslint-disable-next-line no-undef
+const emit = defineEmits(['add-to-cart'])
+
 const product = ref('Socks')
 const brand = ref('Vue Mastery')
 
@@ -44,7 +47,9 @@ const shipping = computed(() => {
 })
 // end computed properties
 
-// const addToCart = () => cart.value += 1
+const addToCart = () => {
+    emit('add-to-cart', variants.value[selectedVariant.value].id)
+}
 
 const updateVariant = (index) => {
   selectedVariant.value = index
