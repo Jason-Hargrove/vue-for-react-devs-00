@@ -97,7 +97,16 @@ const addReview = (review) => {
         </button>
       </div>
     </div>
-    <ReviewList :reviews="reviews"></ReviewList>
+    <ReviewList :reviews="reviews">
+      <template #heading>
+        Reviews:
+      </template>
+      <template #item="{ review }">
+        <span>{{ review.name }} gave this {{ review.raiting }} stars</span>
+        <br/>
+        <span>{{ review.content }}</span>
+      </template>
+    </ReviewList>
     <ReviewForm @review-submitted="addReview"></ReviewForm>
   </div>
 </template>
